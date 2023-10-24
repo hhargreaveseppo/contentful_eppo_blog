@@ -16,15 +16,15 @@ const eppoClient = EppoSdk.getInstance();
 
 const homepage_entry_id = eppoClient.getStringAssignment(
     userid, // unique identifier for the user
-    "homepage_cta", // flag key from Eppo UI
+    process.env.EPPO_EXPERIMENT_KEY, // flag key from Eppo UI
     )
-console.log('homepage_entry_id', homepage_entry_id)
+console.log(process.env.EPPO_EXPERIMENT_KEY, homepage_entry_id)
 
 //contentful specific methods
 
 const contentfulClient = await contentful.createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+  space: process.env.CONTENTFUL_SPACE_ID, // Contentful Space ID
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN // Contentful Access Token
 })
 
 const entry = await contentfulClient.getEntry(homepage_entry_id)
